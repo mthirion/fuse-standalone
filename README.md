@@ -22,7 +22,7 @@ The package can be deployed to Nexus and then used in another project as a featu
     &lt;artifactId&gt;appName&lt;/artifactId&gt; <br>
     &lt;version&gt;x.y.z&lt;version&gt; <br>
     &lt;classifier&gt;features&lt;/classifier&gt; <br>
-    &lt;type&gt;xml&lt/type&gt; <br>
+    &lt;type&gt;xml&lt;/type&gt; <br>
 &lt;/dependency&gt; <br>
 
 The deployed features.xml repository can be added in Karaf with: <br>
