@@ -23,8 +23,8 @@
 	</distributionManagement>
 
 	<properties>
-		<package>org.apache.karaf</package>
-		<application>karaf</application>
+		<package>org.apache.karaf.tooling</package>
+		<application>karaf-maven-plugin</application>
 		<version>4.0.7</version>
 	</properties>
 
