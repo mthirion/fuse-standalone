@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>integration.redhat.org</groupId>
+	<artifactId>fuse-standalone</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+
+	<distributionManagement>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>nexus-snapshots</id>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+		<repository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>nexus</id>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<package>org.apacha.karaf</package>
+		<application>karaf</application>
+		<version>4.0.7</version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>${package}</groupId>
+			<artifactId>${application}</artifactId>
+			<version>${version}</version>
+			<scope></scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<version>2.4.4</version>
+				<executions>
+					<execution>
+						<id>create-kar</id>
+						<goals>
+							<goal>create-kar</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<featuresFile>target/feature/features.xml</featuresFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>target/feature/features.xml</file>
+									<type>xml</type>
+									<classifier>features</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<version>2.4.4</version>
+				<executions>
+					<execution>
+						<id>generate-features</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate-features-xml</goal>
+						</goals>
+						<configuration>
+							<!--<bundles>src/main/resources/bundles.properties</bundles>-->
+							<outputFile>target/feature/features.xml</outputFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.karaf.tooling
+										</groupId>
+										<artifactId>
+											features-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.4.4,)
+										</versionRange>
+										<goals>
+											<goal>
+												generate-features-xml
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+</project>
