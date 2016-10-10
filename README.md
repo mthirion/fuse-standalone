@@ -17,13 +17,13 @@ Packaging and deployment of OSGI bundles on Fuse Karaf standalone
 ### Using the resulting feature
 The package can be deployed to Nexus and then used in another project as a feature dependency with: <br>
 
-&lt;dependency&gt;
-    <groupId>appNamespace</groupId>
-    <artifactId>appName</artifactId>
-    <version>x.y.z<version>
-    <classifier>features</classifier>
-    <type>xml</type>
-</dependency>
+&lt;dependency&gt; 
+    &lt;groupId&gt;appNamespace&lt;/groupId&gt; 
+    &lt;artifactId&gt;appName&lt;/artifactId&gt; 
+    &lt;version&gt;x.y.z&lt;version&gt;
+    &lt;classifier&gt;features&lt;/classifier&gt;
+    &lt;type&gt;xml&lt/type&gt;
+&lt;/dependency&gt;
 
 The deployed features.xml repository can be added in Karaf with: <br>
 features:add-url mvn:appNamespace/appName/x.y.z/xml/features
