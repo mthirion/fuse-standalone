@@ -23,7 +23,7 @@
 	</distributionManagement>
 
 	<properties>
-		<package>org.apacha.karaf</package>
+		<package>org.apache.karaf</package>
 		<application>karaf</application>
 		<version>4.0.7</version>
 	</properties>
